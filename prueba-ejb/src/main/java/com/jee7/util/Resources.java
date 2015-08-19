@@ -44,6 +44,7 @@ public class Resources {
 
     @Produces
     public Logger produceLog(InjectionPoint injectionPoint) {
+    	// Fichero modificado
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 }

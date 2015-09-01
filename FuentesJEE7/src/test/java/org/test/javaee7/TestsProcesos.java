@@ -16,7 +16,7 @@ public class TestsProcesos {
 
 	private Proceso proceso;
 	
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 		Map properties = new HashMap<>();
 		//D:\Programas\wls12130\wlserver\server\lib
@@ -32,11 +32,11 @@ public class TestsProcesos {
 		proceso = (Proceso)objeto;
 	}
 
-	@After
+	//@After
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	//@Test
 	public void test() {
 		String resultado = proceso.metodoPrueba();
 		assertTrue("hola".equalsIgnoreCase(resultado));

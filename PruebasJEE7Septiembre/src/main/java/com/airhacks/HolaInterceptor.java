@@ -1,40 +1,41 @@
 package com.airhacks;
 
+import java.util.Arrays;
+import java.util.logging.Logger;
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.servlet.SessionCookieConfig;
 
 public class HolaInterceptor {
 
+	private Logger logger = Logger.getLogger("HolaInterceptor");
+	
 	@Resource
 	private SessionContext sessionCtx;
 	
+	@Inject
+	ContadorProvider contador;
+	
 	@AroundInvoke
 	public Object modifyGreeting(InvocationContext ctx) throws Exception {
-	    //Usuario
-		System.out.print(sessionCtx.getCallerPrincipal().getName() + "-");
-		//Nombre de la clase
-		System.out.print(ctx.getTarget().getClass().getName() + " ");
-		//Nombre del método
-		System.out.print(ctx.getMethod().getName());
+		int idTraza = contador.getContador();
+		logger.info("[ID] " + idTraza + " - "
+				+ "Usuario: " + sessionCtx.getCallerPrincipal().getName()
+				+", Clase: " + ctx.getTarget().getClass().getName()
+				+", Metodo: " + ctx.getMethod().getName()
+				+ ", Parametros: "+Arrays.toString(ctx.getParameters()));		
 		
-		Object[] parameters = ctx.getParameters();
-	    
-	    for (int i = 0; i < parameters.length; i++) {
-			System.out.print(" parametros: " + parameters[i]);
-		}
-//	    String param = (String) parameters[0];
-//	    param = param.toLowerCase();
-//	    parameters[0] = param;
-//	    ctx.setParameters(parameters);
 	    try {
 	        Object objetoDevuelto = ctx.proceed();
-	    	System.out.println(" Valor devuelto:  " + objetoDevuelto.toString());
+	        logger.info("[ID] " + idTraza + " - "
+					+ " Valor devuelto:  " + objetoDevuelto.toString());
 	    	return objetoDevuelto;
 	    } catch (Exception e) {
-	        System.out.println("Error calling ctx.proceed in modifyGreeting()");
+	    	logger.severe("Error calling ctx.proceed in modifyGreeting()");
 	        return null;
 	    }
 	}

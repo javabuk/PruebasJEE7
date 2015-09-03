@@ -5,6 +5,15 @@
     <artifactId>PruebasJEE7Septiembre</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
+    
+     <!-- Para evitar el error de  -->
+  	<repositories>
+		<repository>
+			<id>JBoss repository</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+  	</repositories>
+    
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -12,6 +21,28 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        
+        <dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.jboss.resteasy</groupId>
+    		<artifactId>resteasy-multipart-provider</artifactId>
+    		<version>2.2.0.GA</version>
+    		<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>2.2.0.GA</version>
+		</dependency>
+        
     </dependencies>
     <build>
         <finalName>PruebasJEE7Septiembre</finalName>
